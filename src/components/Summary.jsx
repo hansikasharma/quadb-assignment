@@ -1,30 +1,21 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation, Link } from 'react-router-dom';
 import parse from 'html-react-parser';
-import { Link } from 'react-router-dom';
-function Summary({shows}){
+
+
+function Summary(props){
 	const params = useParams();
 	const getShow = params;
-	// console.log(show);
-	// console.log(shows);
-	const keys = Object.keys(shows);
-	let foundShow = null;
+	const location = useLocation();
+	const shows = location.state?.show;
+	console.log(location);
 	
-	
-	for(let i=0;i<keys.length;i++ ){
-		
-		
-		if(shows[keys[i]].show.id.toString(10) === getShow.id){
-			
-			foundShow= shows[keys[i]].show;
-			break;
-		}
-	}
- 
 	
 	
 	return (<>
-	<div className = "summary-card">{parse(foundShow.summary)}</div>
-	<Link to = {"/form"}><input type = "submit" value = "book-tickets" name = "booktic" className = "submit"/></Link>
+	
+	<div className = "summary-card">{parse(shows.show.summary)}</div>
+	<Link to = {"/form/"+shows.show.name}><input type = "submit" value = "book-tickets" name = "booktic" className = "submit"/></Link>
+	<Link to = "/"><button type = "submit" className = "submit">GO BACK</button></Link>
 	</>
 	
 	)

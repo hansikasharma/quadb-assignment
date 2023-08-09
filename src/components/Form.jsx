@@ -1,8 +1,12 @@
+import { useParams, Link } from 'react-router-dom';
 function Form (){
+	const params = useParams();
+	const getName = params;
 	return (
+	<>
 	
     <form className="form">
-       <p className="form-title">Fill your details to book tickets</p>
+       <p className="form-title">Fill your details to book tickets for {getName.name}</p>
         <div className="input-container">
           <input type="email" placeholder="Enter email" />
           <span>
@@ -20,7 +24,8 @@ function Form (){
         <a href="">Sign up</a>
       </p>
    </form>
-
+  <Link to = "/"> <button type = "submit" className = "submit">GO BACK</button></Link>
+</>
 	)
 }
 export default Form;
